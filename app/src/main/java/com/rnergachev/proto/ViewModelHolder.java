@@ -14,42 +14,43 @@ import java.util.Set;
 
 public class ViewModelHolder extends Fragment {
 
-    private HashMap<BaseView, BaseViewModel> container;
+    private HashMap<String, BaseViewModel> container;
 
     public ViewModelHolder() {
+        container = new HashMap<>();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        container = new HashMap<>();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Set<BaseView> attachedViews = container.keySet();
-        for (BaseView view : attachedViews) {
-            detach(view);
+        Set<String> attachedViews = container.keySet();
+        for (String className : attachedViews) {
+            BaseViewModel viewModel = container.get(className);
+            viewModel.clear();
+            container.remove(className);
         }
     }
 
-    public void attach(BaseView view, BaseViewModel viewModel) {
-        container.put(view, viewModel);
+    public void attach(Class viewClass, BaseViewModel viewModel) {
+        container.put(viewClass.getCanonicalName(), viewModel);
     }
 
-    public void detach(BaseView view) {
-        BaseViewModel viewModel = container.get(view);
+    public void detach(Class viewClass) {
+        BaseViewModel viewModel = container.get(viewClass.getCanonicalName());
         if (viewModel != null) {
             viewModel.clear();
-            container.remove(view);
+            container.remove(viewClass.getCanonicalName());
         }
-
     }
 
     @Nullable
-    public BaseViewModel getViewModel(BaseView view) {
-        return container.get(view);
+    public BaseViewModel getViewModel(Class viewClass) {
+        return container.get(viewClass.getCanonicalName());
     }
 }
