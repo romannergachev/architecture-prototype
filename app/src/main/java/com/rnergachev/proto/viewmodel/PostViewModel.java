@@ -1,15 +1,17 @@
-package com.rnergachev.proto;
+package com.rnergachev.proto.viewmodel;
 
 import android.databinding.ObservableField;
 import android.os.Handler;
 import android.os.Looper;
+
+import com.rnergachev.proto.base.BaseViewModel;
 
 /**
  * Created by rnergachev on 28/06/2017.
  */
 
 public class PostViewModel implements BaseViewModel {
-    public ObservableField<String> sampleString;
+    public final ObservableField<String> sampleString;
 
     public PostViewModel() {
         sampleString = new ObservableField<>("");
@@ -17,7 +19,7 @@ public class PostViewModel implements BaseViewModel {
         (new Handler(Looper.getMainLooper())).postDelayed(new Runnable() {
             @Override
             public void run() {
-                sampleString.set("sample3");
+                sampleString.set("sample13");
             }
         }, 3000);
     }

@@ -1,7 +1,6 @@
-package com.rnergachev.proto;
+package com.rnergachev.proto.base;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
@@ -30,27 +29,27 @@ public class ViewModelHolder extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         Set<String> attachedViews = container.keySet();
-        for (String className : attachedViews) {
-            BaseViewModel viewModel = container.get(className);
+        for (String id : attachedViews) {
+            BaseViewModel viewModel = container.get(id);
             viewModel.clear();
-            container.remove(className);
+            container.remove(id);
         }
     }
 
-    public void attach(Class viewClass, BaseViewModel viewModel) {
-        container.put(viewClass.getCanonicalName(), viewModel);
+    public void attach(String id, BaseViewModel viewModel) {
+        container.put(id, viewModel);
     }
 
-    public void detach(Class viewClass) {
-        BaseViewModel viewModel = container.get(viewClass.getCanonicalName());
+    public void detach(String id) {
+        BaseViewModel viewModel = container.get(id);
         if (viewModel != null) {
             viewModel.clear();
-            container.remove(viewClass.getCanonicalName());
+            container.remove(id);
         }
     }
 
     @Nullable
-    public BaseViewModel getViewModel(Class viewClass) {
-        return container.get(viewClass.getCanonicalName());
+    public BaseViewModel getViewModel(String id) {
+        return container.get(id);
     }
 }
