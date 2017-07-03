@@ -2,7 +2,6 @@ package com.rnergachev.proto;
 
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingComponent;
-import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;

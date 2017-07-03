@@ -51,7 +51,7 @@ public class PostsListActivity extends BaseActivity<PostViewModel> implements Po
     @Override
     public void onClick(DetailedPost post) {
         Intent intent = new Intent(this, PostInfoActivity.class);
-        intent.putExtra("name", post);
+        intent.putExtra(getString(R.string.DETAILED_POST), post);
         startActivity(intent);
     }
 }

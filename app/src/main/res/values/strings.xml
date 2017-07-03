@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Architecture Prototype</string>
     <string name="base_url"> http://jsonplaceholder.typicode.com/</string>
+    <string name="DETAILED_POST">DETAILED_POST</string>
 </resources>

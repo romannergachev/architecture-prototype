@@ -21,7 +21,7 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         VM viewModel = getViewModel();
-        ViewDataBinding binding = DataBindingUtil.setContentView(this, getLayoutId());
+        ViewDataBinding binding = DataBindingUtil.setContentView(this, getLayoutId(), new ProtoDataBindingComponent());
         binding.setVariable(BR.model, viewModel);
     }
 

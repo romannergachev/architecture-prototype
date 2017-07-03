@@ -2,6 +2,7 @@ package com.rnergachev.proto.activity;
 
 import com.rnergachev.proto.R;
 import com.rnergachev.proto.base.BaseActivity;
+import com.rnergachev.proto.data.model.DetailedPost;
 import com.rnergachev.proto.viewmodel.PostInfoViewModel;
 
 /**
@@ -16,6 +17,7 @@ public class PostInfoActivity extends BaseActivity<PostInfoViewModel> {
 
     @Override
     protected PostInfoViewModel createViewModel() {
-        return new PostInfoViewModel();
+        DetailedPost post = getIntent().getParcelableExtra(getString(R.string.DETAILED_POST));
+        return new PostInfoViewModel(post);
     }
 }

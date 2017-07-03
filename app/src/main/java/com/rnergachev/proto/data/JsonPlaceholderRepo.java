@@ -52,6 +52,6 @@ public class JsonPlaceholderRepo {
     }
 
     private String getImageUrl(String email) {
-        return "https://api.adorable.io/avatar/64/" + email;
+        return "https://api.adorable.io/avatar/256/" + email;
     }
 }
