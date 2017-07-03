@@ -1,0 +1,47 @@
+package com.rnergachev.proto.viewmodel;
+
+import com.rnergachev.proto.data.JsonPlaceholderRepo;
+import com.rnergachev.proto.data.model.DetailedPost;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import io.reactivex.Single;
+
+import static junit.framework.Assert.assertEquals;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+/**
+ * Created by rnergachev on 03/07/2017.
+ */
+
+@RunWith(MockitoJUnitRunner.class)
+public class PostListViewModelUnitTest {
+    @Mock
+    private JsonPlaceholderRepo repo;
+    private PostListViewModel vm;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        vm = new PostListViewModel(repo);
+        vm.titleList = new DetailedPost(0, "", "", "", "");
+    }
+
+    @Test
+    public void vm_should_load_comments() {
+        when(repo.getComments(0))
+            .thenReturn(Single.just(10));
+
+        vm.loadComments();
+
+        verify(repo, atLeastOnce()).getComments(0);
+        assertEquals(10, vm.postInfo.getNumberOfComments());
+    }
+}

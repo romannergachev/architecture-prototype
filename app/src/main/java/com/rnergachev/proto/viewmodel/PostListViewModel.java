@@ -15,13 +15,13 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by rnergachev on 29/06/2017.
  */
 
-public class PostListItemViewModel implements BaseViewModel {
+public class PostListViewModel implements BaseViewModel {
     public final ObservableArrayList<DetailedPost> titleList;
     private final JsonPlaceholderRepo repo;
     private final CompositeDisposable subscriptions;
 
     @Inject
-    public PostListItemViewModel(JsonPlaceholderRepo repo) {
+    public PostListViewModel(JsonPlaceholderRepo repo) {
         titleList = new ObservableArrayList<>();
         this.repo = repo;
         this.subscriptions = new CompositeDisposable();

@@ -1,7 +1,9 @@
 package com.rnergachev.proto;
 
 import android.app.Application;
+import android.databinding.DataBindingUtil;
 
+import com.rnergachev.proto.binding.ProtoDataBindingComponent;
 import com.rnergachev.proto.di.ApplicationComponent;
 import com.rnergachev.proto.di.ApplicationModule;
 import com.rnergachev.proto.di.DaggerApplicationComponent;
@@ -27,6 +29,7 @@ public class ProtoApplication extends Application {
             .loggingEnabled(false)
             .build();
         Picasso.setSingletonInstance(picasso);
+        DataBindingUtil.setDefaultComponent(new ProtoDataBindingComponent());
     }
 
 }

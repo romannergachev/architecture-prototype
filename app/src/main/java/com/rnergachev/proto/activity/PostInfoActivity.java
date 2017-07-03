@@ -1,5 +1,10 @@
 package com.rnergachev.proto.activity;
 
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
+
+import com.rnergachev.proto.ProtoApplication;
 import com.rnergachev.proto.R;
 import com.rnergachev.proto.base.BaseActivity;
 import com.rnergachev.proto.data.model.DetailedPost;
@@ -17,7 +22,20 @@ public class PostInfoActivity extends BaseActivity<PostInfoViewModel> {
 
     @Override
     protected PostInfoViewModel createViewModel() {
-        DetailedPost post = getIntent().getParcelableExtra(getString(R.string.DETAILED_POST));
-        return new PostInfoViewModel(post);
+        DetailedPost post = getIntent().getParcelableExtra(getString(R.string.detailed_post));
+        PostInfoViewModel vm = viewModelProvider.get();
+        vm.postInfo = post;
+        return vm;
+    }
+
+    @Override
+    public void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        getViewModel().loadComments();
+    }
+
+    @Override
+    protected void injectDependencies() {
+        ((ProtoApplication) getApplication()).appComponent.inject(this);
     }
 }

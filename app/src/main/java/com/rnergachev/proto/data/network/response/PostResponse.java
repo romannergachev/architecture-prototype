@@ -10,6 +10,17 @@ public class PostResponse {
     private String title;
     private String body;
 
+    public PostResponse() {
+
+    }
+
+    public PostResponse(int userId, int id, String title, String body) {
+        this.userId = userId;
+        this.id = id;
+        this.title = title;
+        this.body = body;
+    }
+
     public int getUserId() {
         return userId;
     }

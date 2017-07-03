@@ -8,7 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.android.databinding.library.baseAdapters.BR;
-import com.rnergachev.proto.ProtoDataBindingComponent;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 /**
  * Created by rnergachev on 29/06/2017.
@@ -17,11 +19,16 @@ import com.rnergachev.proto.ProtoDataBindingComponent;
 public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatActivity implements BaseView {
     private static final String VIEW_HOLDER = "VIEW_HOLDER";
 
+    @Inject public Provider<VM> viewModelProvider;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        injectDependencies();
+
         VM viewModel = getViewModel();
-        ViewDataBinding binding = DataBindingUtil.setContentView(this, getLayoutId(), new ProtoDataBindingComponent());
+        ViewDataBinding binding = DataBindingUtil.setContentView(this, getLayoutId());
         binding.setVariable(BR.model, viewModel);
     }
 
@@ -49,7 +56,11 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         return vm;
     }
 
+    protected VM createViewModel() {
+        return viewModelProvider.get();
+    }
+
     abstract protected int getLayoutId();
 
-    abstract protected VM createViewModel();
+    protected abstract void injectDependencies();
 }

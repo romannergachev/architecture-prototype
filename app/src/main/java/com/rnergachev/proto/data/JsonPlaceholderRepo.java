@@ -1,21 +1,21 @@
 package com.rnergachev.proto.data;
 
+import android.content.Context;
+
+import com.rnergachev.proto.R;
 import com.rnergachev.proto.data.model.DetailedPost;
 import com.rnergachev.proto.data.network.JsonPlaceholderApi;
 import com.rnergachev.proto.data.network.response.UserResponse;
 
-import java.net.URI;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Predicate;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by rnergachev on 30/06/2017.
@@ -23,10 +23,21 @@ import io.reactivex.schedulers.Schedulers;
 
 public class JsonPlaceholderRepo {
     private JsonPlaceholderApi api;
+    private Context context;
+    private Scheduler observeScheduler;
+    private Scheduler subscribeScheduler;
 
     @Inject
-    public JsonPlaceholderRepo(JsonPlaceholderApi api) {
+    public JsonPlaceholderRepo(
+        JsonPlaceholderApi api,
+        Context context,
+        @Named("observe") Scheduler observeScheduler,
+        @Named("subscribe") Scheduler subscribeScheduler
+    ) {
         this.api = api;
+        this.context = context;
+        this.observeScheduler = observeScheduler;
+        this.subscribeScheduler = subscribeScheduler;
     }
 
     public Single<List<DetailedPost>> getPostsList() {
@@ -47,11 +58,19 @@ public class JsonPlaceholderRepo {
                     })
                     .toList()
                     .blockingGet())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread());
+            .subscribeOn(subscribeScheduler)
+            .observeOn(observeScheduler);
+    }
+
+    public Single<Integer> getComments(int postId) {
+        return api.getComments(postId)
+            .map(ArrayList::size)
+            .subscribeOn(subscribeScheduler)
+            .observeOn(observeScheduler);
+
     }
 
     private String getImageUrl(String email) {
-        return "https://api.adorable.io/avatar/256/" + email;
+        return context.getString(R.string.avatar_url) + email;
     }
 }

@@ -1,13 +1,17 @@
 package com.rnergachev.proto.data.model;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.rnergachev.proto.BR;
 
 /**
  * Created by rnergachev on 29/06/2017.
  */
 
-public class DetailedPost implements Parcelable {
+public class DetailedPost extends BaseObservable implements Parcelable {
     private int id;
     private String title;
     private String body;
@@ -41,12 +45,14 @@ public class DetailedPost implements Parcelable {
         return userName;
     }
 
+    @Bindable
     public int getNumberOfComments() {
         return numberOfComments;
     }
 
     public void setNumberOfComments(int numberOfComments) {
         this.numberOfComments = numberOfComments;
+        notifyPropertyChanged(BR.numberOfComments);
     }
 
     public String getImageUrl() {

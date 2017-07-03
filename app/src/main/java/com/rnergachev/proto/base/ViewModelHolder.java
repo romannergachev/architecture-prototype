@@ -31,7 +31,9 @@ public class ViewModelHolder extends Fragment {
         Set<String> attachedViews = container.keySet();
         for (String id : attachedViews) {
             BaseViewModel viewModel = container.get(id);
-            viewModel.clear();
+            if(viewModel != null) {
+                viewModel.clear();
+            }
             container.remove(id);
         }
     }

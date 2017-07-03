@@ -1,22 +1,43 @@
 package com.rnergachev.proto.viewmodel;
 
-import android.databinding.ObservableField;
+import android.util.Log;
 
 import com.rnergachev.proto.base.BaseViewModel;
-import com.rnergachev.proto.data.PostInfo;
+import com.rnergachev.proto.data.JsonPlaceholderRepo;
 import com.rnergachev.proto.data.model.DetailedPost;
+
+import javax.inject.Inject;
+
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by rnergachev on 29/06/2017.
  */
 
 public class PostInfoViewModel implements BaseViewModel {
-    public final ObservableField<DetailedPost> postInfo;
+    public DetailedPost postInfo;
+    private final JsonPlaceholderRepo repo;
+    private final CompositeDisposable subscriptions;
 
-    public PostInfoViewModel(DetailedPost post) {
-        postInfo = new ObservableField<>(post);
+    @Inject
+    public PostInfoViewModel(JsonPlaceholderRepo repo) {
+        postInfo = null;
+        this.repo = repo;
+        this.subscriptions = new CompositeDisposable();
+    }
+
+    public void loadComments() {
+        subscriptions.add(repo.getComments(postInfo.getId()).subscribe(
+            size -> {
+                postInfo.setNumberOfComments(size);
+            }, e -> {
+                Log.e(getClass().getName(), "Update failed", e);
+            }
+        ));
     }
 
     @Override
-    public void clear() { }
+    public void clear() {
+        subscriptions.clear();
+    }
 }

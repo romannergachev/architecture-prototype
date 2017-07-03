@@ -9,11 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rnergachev.proto.BR;
-import com.rnergachev.proto.ProtoDataBindingComponent;
 import com.rnergachev.proto.R;
 import com.rnergachev.proto.data.model.DetailedPost;
 import com.rnergachev.proto.handler.PostListAdapterHandler;
-import com.rnergachev.proto.viewmodel.PostListItemViewModel;
+import com.rnergachev.proto.viewmodel.PostListViewModel;
 
 /**
  * Created by rnergachev on 29/06/2017.
@@ -21,7 +20,7 @@ import com.rnergachev.proto.viewmodel.PostListItemViewModel;
 
 public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostListViewHolder> {
 
-    private final PostListItemViewModel viewModel;
+    private final PostListViewModel viewModel;
     private PostListAdapterHandler handler;
 
     class PostListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -36,7 +35,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
         }
     }
 
-    public PostListAdapter(PostListItemViewModel viewModel, PostListAdapterHandler handler) {
+    public PostListAdapter(PostListViewModel viewModel, PostListAdapterHandler handler) {
         this.viewModel = viewModel;
         this.handler = handler;
         this.viewModel.titleList.addOnListChangedCallback(new ObservableList.OnListChangedCallback<ObservableList<DetailedPost>>() {
@@ -75,7 +74,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
 
     @Override
     public void onBindViewHolder(PostListViewHolder holder, int position) {
-        ViewDataBinding binding = DataBindingUtil.bind(holder.itemView, new ProtoDataBindingComponent());
+        ViewDataBinding binding = DataBindingUtil.bind(holder.itemView);
         binding.setVariable(BR.model, viewModel);
         binding.setVariable(BR.position, position);
         binding.executePendingBindings();
