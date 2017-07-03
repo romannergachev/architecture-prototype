@@ -16,13 +16,13 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 
 public class PostListViewModel implements BaseViewModel {
-    public final ObservableArrayList<DetailedPost> titleList;
+    public final ObservableArrayList<DetailedPost> postsList;
     private final JsonPlaceholderRepo repo;
     private final CompositeDisposable subscriptions;
 
     @Inject
     public PostListViewModel(JsonPlaceholderRepo repo) {
-        titleList = new ObservableArrayList<>();
+        postsList = new ObservableArrayList<>();
         this.repo = repo;
         this.subscriptions = new CompositeDisposable();
 
@@ -33,8 +33,8 @@ public class PostListViewModel implements BaseViewModel {
         subscriptions.add(repo.getPostsList().subscribe(
             list -> {
                 Log.d(getClass().getName(), "Update loaded: " + list.size());
-                titleList.clear();
-                titleList.addAll(list);
+                postsList.clear();
+                postsList.addAll(list);
             }, e -> {
                 Log.e(getClass().getName(), "Update failed", e);
             }

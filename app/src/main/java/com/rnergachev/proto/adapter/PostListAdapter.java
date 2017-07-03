@@ -31,14 +31,14 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
 
         @Override
         public void onClick(View v) {
-            handler.onClick(viewModel.titleList.get(getAdapterPosition()));
+            handler.onClick(viewModel.postsList.get(getAdapterPosition()));
         }
     }
 
     public PostListAdapter(PostListViewModel viewModel, PostListAdapterHandler handler) {
         this.viewModel = viewModel;
         this.handler = handler;
-        this.viewModel.titleList.addOnListChangedCallback(new ObservableList.OnListChangedCallback<ObservableList<DetailedPost>>() {
+        this.viewModel.postsList.addOnListChangedCallback(new ObservableList.OnListChangedCallback<ObservableList<DetailedPost>>() {
             @Override
             public void onChanged(ObservableList<DetailedPost> detailedPosts) {
                 notifyDataSetChanged();
@@ -82,6 +82,6 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
 
     @Override
     public int getItemCount() {
-        return viewModel.titleList.size();
+        return viewModel.postsList.size();
     }
 }

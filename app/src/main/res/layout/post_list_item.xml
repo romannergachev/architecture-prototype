@@ -21,7 +21,7 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:imageUrl="@{model.titleList[position].imageUrl}"/>
+            app:imageUrl="@{model.postsList[position].imageUrl}"/>
 
         <TextView
             android:id="@+id/textView"
@@ -30,6 +30,6 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="@{model.titleList[position].title}"/>
+            android:text="@{model.postsList[position].title}"/>
     </LinearLayout>
 </layout>
