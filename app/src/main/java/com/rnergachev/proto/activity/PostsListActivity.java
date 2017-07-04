@@ -15,6 +15,8 @@ import com.rnergachev.proto.handler.PostListAdapterHandler;
 import com.rnergachev.proto.viewmodel.PostListViewModel;
 
 /**
+ * Post List activity
+ *
  * Created by rnergachev on 28/06/2017.
  */
 
@@ -29,6 +31,12 @@ public class PostsListActivity extends BaseActivity<PostListViewModel> implement
         RecyclerView view = (RecyclerView) findViewById(R.id.postsList);
         view.setLayoutManager(new LinearLayoutManager(this));
         view.setAdapter(new PostListAdapter(getViewModel(), this));
+    }
+
+    @Override
+    public void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        getViewModel().loadPosts();
     }
 
     @Override

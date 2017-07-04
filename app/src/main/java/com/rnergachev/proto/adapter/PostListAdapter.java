@@ -15,6 +15,8 @@ import com.rnergachev.proto.handler.PostListAdapterHandler;
 import com.rnergachev.proto.viewmodel.PostListViewModel;
 
 /**
+ * Recycler view adapter for posts list
+ *
  * Created by rnergachev on 29/06/2017.
  */
 

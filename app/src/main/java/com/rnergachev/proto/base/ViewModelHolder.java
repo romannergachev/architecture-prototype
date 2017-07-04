@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
+ * Holder for view models
+ *
  * Created by rnergachev on 28/06/2017.
  */
 
@@ -38,10 +40,19 @@ public class ViewModelHolder extends Fragment {
         }
     }
 
+    /**
+     * Puts view model into holder
+     * @param id of the owner
+     * @param viewModel to put
+     */
     public void attach(String id, BaseViewModel viewModel) {
         container.put(id, viewModel);
     }
 
+    /**
+     * Removes view model from the holder
+     * @param id of the owner
+     */
     public void detach(String id) {
         BaseViewModel viewModel = container.get(id);
         if (viewModel != null) {
@@ -50,6 +61,11 @@ public class ViewModelHolder extends Fragment {
         }
     }
 
+    /**
+     * Returns view model by id
+     * @param id of the owner
+     * @return {@link BaseViewModel} or null if model doesn't exist
+     */
     @Nullable
     public BaseViewModel getViewModel(String id) {
         return container.get(id);

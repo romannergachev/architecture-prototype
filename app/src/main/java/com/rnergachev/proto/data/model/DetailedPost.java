@@ -8,6 +8,8 @@ import android.os.Parcelable;
 import com.rnergachev.proto.BR;
 
 /**
+ * Merged post information from User, Post and Comments
+ *
  * Created by rnergachev on 29/06/2017.
  */
 

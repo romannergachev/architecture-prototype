@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
 /**
+ * Binding component for Picasso
+ *
  * Created by rnergachev on 30/06/2017.
  */
 

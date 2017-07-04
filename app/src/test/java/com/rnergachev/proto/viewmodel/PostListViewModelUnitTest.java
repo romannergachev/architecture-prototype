@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+
 import io.reactivex.Single;
 
 import static junit.framework.Assert.assertEquals;
@@ -18,6 +20,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
+ * {@link PostListViewModel} unit test
+ *
  * Created by rnergachev on 03/07/2017.
  */
 
@@ -26,22 +30,25 @@ public class PostListViewModelUnitTest {
     @Mock
     private JsonPlaceholderRepo repo;
     private PostListViewModel vm;
+    private ArrayList<DetailedPost> data;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         vm = new PostListViewModel(repo);
-        //vm.postsList = new DetailedPost(0, "", "", "", "");
+        data = new ArrayList<>();
+        data.add(new DetailedPost());
+        data.add(new DetailedPost());
     }
 
     @Test
-    public void vm_should_load_comments() {
-        when(repo.getComments(0))
-            .thenReturn(Single.just(10));
+    public void vm_should_load_posts() throws InterruptedException {
+        when(repo.getPostsList())
+            .thenReturn(Single.just(data));
 
-//        vm.loadComments();
-//
-//        verify(repo, atLeastOnce()).getComments(0);
-//        assertEquals(10, vm.postInfo.getNumberOfComments());
+        vm.loadPosts();
+
+        verify(repo, atLeastOnce()).getPostsList();
+        assertEquals(2, vm.postsList.size());
     }
 }

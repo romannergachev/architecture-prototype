@@ -12,6 +12,8 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
+ * Post list view model
+ *
  * Created by rnergachev on 29/06/2017.
  */
 
@@ -25,14 +27,14 @@ public class PostListViewModel implements BaseViewModel {
         postsList = new ObservableArrayList<>();
         this.repo = repo;
         this.subscriptions = new CompositeDisposable();
-
-        init();
     }
 
-    private void init() {
+    /**
+     * Loads posts into the list
+     */
+    public void loadPosts() {
         subscriptions.add(repo.getPostsList().subscribe(
             list -> {
-                Log.d(getClass().getName(), "Update loaded: " + list.size());
                 postsList.clear();
                 postsList.addAll(list);
             }, e -> {

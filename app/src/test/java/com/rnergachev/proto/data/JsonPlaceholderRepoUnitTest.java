@@ -8,6 +8,7 @@ import com.rnergachev.proto.data.network.response.CommentsResponse;
 import com.rnergachev.proto.data.network.response.PostResponse;
 import com.rnergachev.proto.data.network.response.UserResponse;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,12 +20,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Single;
+import io.reactivex.android.plugins.RxAndroidPlugins;
 import io.reactivex.observers.TestObserver;
 import io.reactivex.schedulers.Schedulers;
 
 import static org.mockito.Mockito.when;
 
 /**
+ * {@link JsonPlaceholderRepo} unit test
+ *
  * Created by rnergachev on 03/07/2017.
  */
 
@@ -39,7 +43,8 @@ public class JsonPlaceholderRepoUnitTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        repo = new JsonPlaceholderRepo(api, context, Schedulers.io(), Schedulers.io());
+        repo = new JsonPlaceholderRepo(api, context);
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler(__ -> Schedulers.trampoline());
     }
 
     @Test
@@ -81,5 +86,10 @@ public class JsonPlaceholderRepoUnitTest {
             .assertValue(list -> list.size() == 1)
             .assertValue(list -> "title".equals(list.get(0).getTitle()))
             .assertValue(list -> "user".equals(list.get(0).getUserName()));
+    }
+
+    @After
+    public void cleanUp() {
+        RxAndroidPlugins.reset();
     }
 }

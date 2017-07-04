@@ -1,7 +1,6 @@
 package com.rnergachev.proto.activity;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 
 import com.rnergachev.proto.ProtoApplication;
@@ -11,6 +10,8 @@ import com.rnergachev.proto.data.model.DetailedPost;
 import com.rnergachev.proto.viewmodel.PostInfoViewModel;
 
 /**
+ * Post Info Activity
+ *
  * Created by rnergachev on 29/06/2017.
  */
 

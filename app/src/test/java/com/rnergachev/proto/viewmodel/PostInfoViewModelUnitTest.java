@@ -10,12 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.internal.operators.single.SingleSubscribeOn;
-import io.reactivex.observers.TestObserver;
-import io.reactivex.subscribers.TestSubscriber;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.atLeastOnce;
@@ -23,6 +18,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
+ * {@link PostInfoViewModel} unit test
+ *
  * Created by rnergachev on 03/07/2017.
  */
 

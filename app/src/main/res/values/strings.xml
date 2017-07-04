@@ -2,7 +2,7 @@
     <string name="app_name">Architecture Prototype</string>
     <string name="base_url">http://jsonplaceholder.typicode.com/</string>
     <string name="detailed_post">DETAILED_POST</string>
-    <string name="avatar_url">https://api.adorable.io/avatar/256/</string>
+    <string name="avatar_url">https://api.adorable.io/avatar/256/%s</string>
 
     <string name="comments">Comments: %d</string>
 </resources>

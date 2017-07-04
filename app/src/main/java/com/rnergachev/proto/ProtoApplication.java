@@ -11,6 +11,8 @@ import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 /**
+ * Application class, used to include dagger, picasso and define default data binding component
+ *
  * Created by rnergachev on 30/06/2017.
  */
 

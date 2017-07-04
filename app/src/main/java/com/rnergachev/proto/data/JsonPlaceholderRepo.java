@@ -11,35 +11,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
+ * Main repo
+ *
  * Created by rnergachev on 30/06/2017.
  */
 
 public class JsonPlaceholderRepo {
     private JsonPlaceholderApi api;
     private Context context;
-    private Scheduler observeScheduler;
-    private Scheduler subscribeScheduler;
 
     @Inject
-    public JsonPlaceholderRepo(
-        JsonPlaceholderApi api,
-        Context context,
-        @Named("observe") Scheduler observeScheduler,
-        @Named("subscribe") Scheduler subscribeScheduler
-    ) {
+    public JsonPlaceholderRepo(JsonPlaceholderApi api, Context context) {
         this.api = api;
         this.context = context;
-        this.observeScheduler = observeScheduler;
-        this.subscribeScheduler = subscribeScheduler;
     }
 
+    /**
+     * Load posts and users combined
+     * @return {@link Single} list of posts
+     */
     public Single<List<DetailedPost>> getPostsList() {
         return api.getPosts()
             .zipWith(api.getUsers(), (posts, users) ->
@@ -58,19 +55,24 @@ public class JsonPlaceholderRepo {
                     })
                     .toList()
                     .blockingGet())
-            .subscribeOn(subscribeScheduler)
-            .observeOn(observeScheduler);
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread());
     }
 
+    /**
+     * Load comments
+     * @param postId id of the commented post
+     * @return {@link Single} number of comments
+     */
     public Single<Integer> getComments(int postId) {
         return api.getComments(postId)
             .map(ArrayList::size)
-            .subscribeOn(subscribeScheduler)
-            .observeOn(observeScheduler);
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread());
 
     }
 
     private String getImageUrl(String email) {
-        return context.getString(R.string.avatar_url) + email;
+        return context.getString(R.string.avatar_url, email);
     }
 }

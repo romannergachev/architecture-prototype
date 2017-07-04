@@ -11,6 +11,8 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
+ * Post info view model
+ *
  * Created by rnergachev on 29/06/2017.
  */
 
@@ -26,6 +28,9 @@ public class PostInfoViewModel implements BaseViewModel {
         this.subscriptions = new CompositeDisposable();
     }
 
+    /**
+     * Loads comments and calculates their quantity
+     */
     public void loadComments() {
         subscriptions.add(repo.getComments(postInfo.getId()).subscribe(
             size -> {

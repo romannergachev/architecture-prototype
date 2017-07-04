@@ -11,6 +11,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
+ * Retrofit api definition
+ *
  * Created by rnergachev on 30/06/2017.
  */
 

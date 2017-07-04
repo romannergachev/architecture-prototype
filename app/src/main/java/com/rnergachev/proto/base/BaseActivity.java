@@ -13,6 +13,8 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
+ * Base Activity class
+ *
  * Created by rnergachev on 29/06/2017.
  */
 
@@ -32,6 +34,10 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         binding.setVariable(BR.model, viewModel);
     }
 
+    /**
+     * Provides view model holder
+     * @return {@link ViewModelHolder}
+     */
     public ViewModelHolder getViewModelHolder() {
         FragmentManager fm = getSupportFragmentManager();
         ViewModelHolder vh = (ViewModelHolder) fm.findFragmentByTag(VIEW_HOLDER);
@@ -60,7 +66,14 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         return viewModelProvider.get();
     }
 
-    abstract protected int getLayoutId();
+    /**
+     * Provides layout id
+     * @return layout id
+     */
+    protected abstract int getLayoutId();
 
+    /**
+     * Injects dependencies
+     */
     protected abstract void injectDependencies();
 }
