@@ -26,8 +26,6 @@ public class PostsListActivity extends BaseActivity<PostListViewModel> implement
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ((ProtoApplication) getApplication()).appComponent.inject(this);
-
         RecyclerView view = (RecyclerView) findViewById(R.id.postsList);
         view.setLayoutManager(new LinearLayoutManager(this));
         view.setAdapter(new PostListAdapter(getViewModel(), this));
