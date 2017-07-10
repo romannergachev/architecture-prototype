@@ -47,23 +47,23 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
             }
 
             @Override
-            public void onItemRangeChanged(ObservableList<DetailedPost> detailedPosts, int i, int i1) {
-                notifyItemRangeChanged(i, i1);
+            public void onItemRangeChanged(ObservableList<DetailedPost> detailedPosts, int positionStart, int itemCount) {
+                notifyItemRangeChanged(positionStart, itemCount);
             }
 
             @Override
-            public void onItemRangeInserted(ObservableList<DetailedPost> detailedPosts, int i, int i1) {
-                notifyItemRangeInserted(i, i1);
+            public void onItemRangeInserted(ObservableList<DetailedPost> detailedPosts, int positionStart, int itemCount) {
+                notifyItemRangeInserted(positionStart, itemCount);
             }
 
             @Override
-            public void onItemRangeMoved(ObservableList<DetailedPost> detailedPosts, int i, int i1, int i2) {
+            public void onItemRangeMoved(ObservableList<DetailedPost> detailedPosts, int fromPosition, int toPosition, int itemCount) {
                 notifyDataSetChanged();
             }
 
             @Override
-            public void onItemRangeRemoved(ObservableList<DetailedPost> detailedPosts, int i, int i1) {
-                notifyItemRangeRemoved(i, i1);
+            public void onItemRangeRemoved(ObservableList<DetailedPost> detailedPosts, int positionStart, int itemCount) {
+                notifyItemRangeRemoved(positionStart, itemCount);
             }
         });
     }
