@@ -3,11 +3,11 @@ package com.rnergachev.proto;
 import android.app.Application;
 import android.databinding.DataBindingUtil;
 
+import com.jakewharton.picasso.OkHttp3Downloader;
 import com.rnergachev.proto.binding.ProtoDataBindingComponent;
 import com.rnergachev.proto.di.ApplicationComponent;
 import com.rnergachev.proto.di.ApplicationModule;
 import com.rnergachev.proto.di.DaggerApplicationComponent;
-import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -26,7 +26,7 @@ public class ProtoApplication extends Application {
         appComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
 
         Picasso picasso = new Picasso.Builder(this)
-            .downloader(new OkHttpDownloader(this,Integer.MAX_VALUE))
+            .downloader(new OkHttp3Downloader(this,Integer.MAX_VALUE))
             .indicatorsEnabled(false)
             .loggingEnabled(false)
             .build();
