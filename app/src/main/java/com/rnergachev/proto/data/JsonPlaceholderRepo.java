@@ -19,10 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Main repo
- *
- * Created by rnergachev on 30/06/2017.
  */
-
 public class JsonPlaceholderRepo {
     private JsonPlaceholderApi api;
     private Context context;

@@ -12,10 +12,7 @@ import retrofit2.http.Query;
 
 /**
  * Retrofit api definition
- *
- * Created by rnergachev on 30/06/2017.
  */
-
 public interface JsonPlaceholderApi {
     /**
      * Returns all posts

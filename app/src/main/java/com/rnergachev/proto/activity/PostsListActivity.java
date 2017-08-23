@@ -16,8 +16,6 @@ import com.rnergachev.proto.viewmodel.PostListViewModel;
 
 /**
  * Post List activity
- *
- * Created by rnergachev on 28/06/2017.
  */
 
 public class PostsListActivity extends BaseActivity<PostListViewModel> implements PostListAdapterHandler {

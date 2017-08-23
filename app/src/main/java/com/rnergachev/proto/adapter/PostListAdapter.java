@@ -16,8 +16,6 @@ import com.rnergachev.proto.viewmodel.PostListViewModel;
 
 /**
  * Recycler view adapter for posts list
- *
- * Created by rnergachev on 29/06/2017.
  */
 
 public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostListViewHolder> {

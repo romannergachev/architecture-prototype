@@ -11,8 +11,6 @@ import com.rnergachev.proto.viewmodel.PostInfoViewModel;
 
 /**
  * Post Info Activity
- *
- * Created by rnergachev on 29/06/2017.
  */
 
 public class PostInfoActivity extends BaseActivity<PostInfoViewModel> {

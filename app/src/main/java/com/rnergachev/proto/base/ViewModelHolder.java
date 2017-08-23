@@ -9,10 +9,7 @@ import java.util.Set;
 
 /**
  * Holder for view models
- *
- * Created by rnergachev on 28/06/2017.
  */
-
 public class ViewModelHolder extends Fragment {
 
     private HashMap<String, BaseViewModel> container;

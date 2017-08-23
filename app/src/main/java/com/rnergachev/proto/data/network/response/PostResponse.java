@@ -2,10 +2,7 @@ package com.rnergachev.proto.data.network.response;
 
 /**
  * Retrofit Post response
- *
- * Created by rnergachev on 30/06/2017.
  */
-
 public class PostResponse {
     private int userId;
     private int id;

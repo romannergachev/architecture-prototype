@@ -9,10 +9,7 @@ import com.rnergachev.proto.BR;
 
 /**
  * Merged post information from User, Post and Comments
- *
- * Created by rnergachev on 29/06/2017.
  */
-
 public class DetailedPost extends BaseObservable implements Parcelable {
     private int id;
     private String title;

@@ -13,10 +13,7 @@ import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Post list view model
- *
- * Created by rnergachev on 29/06/2017.
  */
-
 public class PostListViewModel implements BaseViewModel {
     public final ObservableArrayList<DetailedPost> postsList;
     private final JsonPlaceholderRepo repo;

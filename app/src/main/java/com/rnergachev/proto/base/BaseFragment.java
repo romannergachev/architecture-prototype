@@ -1,11 +1,13 @@
 package com.rnergachev.proto.base;
 
+import android.app.Fragment;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.rnergachev.proto.BR;
 
@@ -13,43 +15,35 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
- * Base Activity class
+ * Base Fragment class
  */
-public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatActivity implements BaseView {
-    private static final String VIEW_HOLDER = "VIEW_HOLDER";
+public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
 
-    @Inject public Provider<VM> viewModelProvider;
+    @Inject
+    public Provider<VM> viewModelProvider;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         injectDependencies();
-
-        VM viewModel = getViewModel();
-        ViewDataBinding binding = DataBindingUtil.setContentView(this, getLayoutId());
-        binding.setVariable(BR.model, viewModel);
     }
 
-    /**
-     * Provides view model holder
-     * @return {@link ViewModelHolder}
-     */
-    public ViewModelHolder getViewModelHolder() {
-        FragmentManager fm = getSupportFragmentManager();
-        ViewModelHolder vh = (ViewModelHolder) fm.findFragmentByTag(VIEW_HOLDER);
-        if (vh == null) {
-            vh = new ViewModelHolder();
-            fm.beginTransaction()
-                .add(vh, VIEW_HOLDER)
-                .commitAllowingStateLoss();
-        }
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        return vh;
+        View root = inflater.inflate(getLayoutId(), container, false);
+
+        VM viewModel = getViewModel();
+        ViewDataBinding binding = DataBindingUtil.getBinding(root);
+        binding.setVariable(BR.model, viewModel);
+
+        return root;
     }
 
     protected VM getViewModel() {
-        ViewModelHolder vh = getViewModelHolder();
+        ViewModelHolder vh = ((BaseActivity) getActivity()).getViewModelHolder();
         VM vm = (VM) vh.getViewModel(this.getClass().getCanonicalName());
         if (vm == null) {
             vm = createViewModel();
@@ -57,6 +51,14 @@ public abstract class BaseActivity<VM extends BaseViewModel> extends AppCompatAc
         }
 
         return vm;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        ViewModelHolder vh = ((BaseActivity) getActivity()).getViewModelHolder();
+        vh.detach(this.getClass().getCanonicalName());
     }
 
     protected VM createViewModel() {

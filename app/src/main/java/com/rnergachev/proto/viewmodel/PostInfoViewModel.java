@@ -12,10 +12,7 @@ import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Post info view model
- *
- * Created by rnergachev on 29/06/2017.
  */
-
 public class PostInfoViewModel implements BaseViewModel {
     public DetailedPost postInfo;
     private final JsonPlaceholderRepo repo;

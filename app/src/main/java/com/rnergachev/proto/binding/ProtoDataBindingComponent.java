@@ -8,10 +8,7 @@ import com.squareup.picasso.Picasso;
 
 /**
  * Binding component for Picasso
- *
- * Created by rnergachev on 30/06/2017.
  */
-
 public class ProtoDataBindingComponent implements DataBindingComponent {
     @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView view, String url) {

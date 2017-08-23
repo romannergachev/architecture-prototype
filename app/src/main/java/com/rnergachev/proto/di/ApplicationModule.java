@@ -15,8 +15,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Application module for dagger
- * <p>
- * Created by rnergachev on 30/06/2017.
  */
 @Module
 public class ApplicationModule {
